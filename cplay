@@ -218,7 +218,7 @@ class StatusWindow(Window):
         return curses.newwin(1, self.parent.cols-12, self.parent.rows-1, 0)
 
     def update(self):
-        msg = string.translate(self.current_message, Window.translationTable)
+        msg = self.current_message
         self.move(0, 0)
         self.clrtoeol()
         self.insstr(cut(msg, self.cols))
@@ -436,7 +436,7 @@ class ListWindow(Window):
         return "%-*s  %s" % (width, cut(self.name+data, width), pos)
 
     def putstr(self, entry, *pos):
-        s = string.translate(str(entry), Window.translationTable)
+        s = str(entry)
         pos and apply(self.move, pos)
         if self.hoffset: s = "<%s" % s[self.hoffset+1:]
         self.insstr(cut(s, self.cols))
