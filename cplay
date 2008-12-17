@@ -906,11 +906,20 @@ class PlaylistWindow(TagListWindow):
 
     def command_change_viewpoint(self, klass=PlaylistEntry):
         if not globals().get("ID3"):
+            global ID3, ogg, codecs
+            have_meta = 0
             try:
-                global ID3, ogg, codecs
-                import ID3, ogg.vorbis, codecs
+                import ID3
+                have_meta = 1
+            except ImportError:
+                pass
+            try:
+                import ogg.vorbis, codecs
+                have_meta = 1
+            except ImportError:
+                pass
+            if have_meta:
                 klass.vps.append([_("metadata"), klass.vp_metadata])
-            except ImportError: pass
         TagListWindow.command_change_viewpoint(self, klass)
 
     def get_title(self):
