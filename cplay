@@ -45,7 +45,7 @@ except: pass
 
 # ------------------------------------------
 _locale_domain = "cplay"
-_locale_dir = "/usr/local/share/locale"
+_locale_dir = "/usr/share/locale"
 
 try:
     import gettext  # python 2.0
